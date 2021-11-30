@@ -1,0 +1,1 @@
+gcc -std=c17 main.c headers/*.c -ID:\Programmation\C\libraries\SDL2\include -LD:\Programmation\C\libraries\SDL2\lib -Wall -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -o main.exe
