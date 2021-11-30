@@ -70,3 +70,18 @@ void InitEntity(App *app, Entity *entity, int x, int y, int w, int h, int dx, in
     entity->texture = IMG_LoadTexture(app->renderer, filename);
 }
 
+void InitStage(Stage *stage) {
+    stage->p1score = 0;
+    stage->p2score = 0;
+    stage->coins = 0;
+    stage->coinbuffer = 0;
+    stage->scorefiles[0] = "sprites/0.png"; 
+    stage->scorefiles[1] = "sprites/1.png"; 
+    stage->scorefiles[2] = "sprites/2.png"; 
+    stage->scorefiles[3] = "sprites/3.png"; 
+    stage->scorefiles[4] = "sprites/4.png";
+    stage->scorefiles[5] = "sprites/5.png";
+    stage->scorefiles[6] = "sprites/6.png";
+    stage->scorefiles[7] = "sprites/7.png";
+
+}

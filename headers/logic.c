@@ -38,6 +38,18 @@ void DoInput(App *app) {
     }
 }
 
+void DoCoins(App *app, Stage *stage) {
+    if (stage->coinbuffer <= 0) {
+        if (app->keys[SDL_SCANCODE_SPACE] == 1) {
+            stage->coins++;
+            stage->coinbuffer = 30;
+            printf("%d", stage->coins);
+        }
+    } else {
+        stage->coinbuffer--;
+    }
+}
+
 void DoPaddles(App *app, Entity *paddle1, Entity *paddle2) {
     
     if (app->keys[SDL_SCANCODE_W] == 1) {
@@ -86,7 +98,7 @@ int Collide(Entity *entity1, Entity *entity2) {
     return 0;
 }
 
-void DoBall(App *app, Entity *ball, Entity *paddle1, Entity *paddle2) {
+void DoBall(App *app, Entity *ball, Entity *paddle1, Entity *paddle2, Stage *stage) {
     if (Collide(ball, paddle1) == 1) {
         
         
@@ -111,11 +123,37 @@ void DoBall(App *app, Entity *ball, Entity *paddle1, Entity *paddle2) {
         ball->dy = -ball->dy;
     }
 
-    if (ball->x < 0 || ball->x+ball->w > 1280) {
+    if (ball->x < 0) {
+        stage->p1score++;
+        ball->x = 1280/2;
+        ball->y = 720/2;
+    }
+
+    if (ball->x+ball->w > 1280) {
+        stage->p2score++;
         ball->x = 1280/2;
         ball->y = 720/2;
     }
 
     ball->x += ball->dx;
     ball->y += ball->dy;
+
+
+}
+
+void CheckPoints(Stage *stage) {
+    if (stage->p1score == 7) {
+        stage->coins--;
+        SDL_Delay(1000);
+        stage->p1score = 0;
+        stage->p2score = 0;
+    }
+
+    if (stage->p2score == 7) {
+        stage->coins--;
+        SDL_Delay(1000);
+        stage->p1score = 0;
+        stage->p2score = 0;
+    }
+    
 }

@@ -19,5 +19,7 @@ typedef struct {
     int p1score;
     int p2score;
     int coins;
+    int coinbuffer;
+    char *scorefiles[8];
     
 } Stage;
